@@ -15,11 +15,11 @@ public class PropertyForm {
     private String prop_name;
     @Valid
     @NotNull(message = "can not be null")
-    private DistrictForm district;
+    private Long district;
     @Valid
     private List<RoomForm> rooms;
 
-    public PropertyForm(String prop_name, DistrictForm district, List<RoomForm> rooms) {
+    public PropertyForm(String prop_name, Long district, List<RoomForm> rooms) {
         this.prop_name = prop_name;
         this.district = district;
         this.rooms = rooms;
@@ -29,7 +29,7 @@ public class PropertyForm {
         return prop_name;
     }
 
-    public DistrictForm getDistrict() {
+    public Long getDistrict() {
         return district;
     }
 

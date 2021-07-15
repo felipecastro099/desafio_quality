@@ -18,6 +18,6 @@ public class DistrictService {
         District district = DistrictMapper.formToEntity(districtForm);
         districtRepository.add(district);
 
-        return new DistrictDTO(district.getName(), district.getValue());
+        return new DistrictDTO(district.getId(), district.getName(), district.getValue());
     }
 }

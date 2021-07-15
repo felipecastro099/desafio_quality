@@ -6,16 +6,23 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DistrictRepository {
     List<District> db = new ArrayList<>();
 
-    public Boolean exists(String name, BigDecimal value) {
-        for (District district: db) {
-            if (district.getName().equals(name) && district.getValue().equals(value)) {
-                return true;
-            }
+    public District findByIdOrNull(Long id) {
+        Optional<District> result =  db.stream().filter(district -> district.getId() == id).findFirst();
+
+        return result.orElse(null);
+    }
+
+    public Boolean exists(Long id) {
+        Optional<District> result = Optional.ofNullable(findByIdOrNull(id));
+
+        if (result.isPresent()) {
+            return  true;
         }
 
         return false;

@@ -4,6 +4,7 @@ import com.example.desafio_quality.dtos.property.PropertyBigRoomDTO;
 import com.example.desafio_quality.dtos.property.PropertyDTO;
 import com.example.desafio_quality.dtos.property.PropertyTotalMetersDTO;
 import com.example.desafio_quality.dtos.property.PropertyTotalValueDTO;
+import com.example.desafio_quality.entities.District;
 import com.example.desafio_quality.entities.Property;
 import com.example.desafio_quality.exceptions.NotFoundException;
 import com.example.desafio_quality.forms.PropertyForm;
@@ -26,9 +27,9 @@ public class PropertyService {
     private PropertyRepository propertyRepository;
 
     public PropertyDTO addProperty(PropertyForm propertyForm) {
-        if (districtRepository.exists(propertyForm.getDistrict().getProp_district(), propertyForm.getDistrict().getValue_district_m2())) {
-            System.out.println(propertyForm.getRooms());
-            Property property = PropertyMapper.formToEntity(propertyForm);
+        if (districtRepository.exists(propertyForm.getDistrict())) {
+            District district = districtRepository.findByIdOrNull(propertyForm.getDistrict());
+            Property property = PropertyMapper.formToEntity(propertyForm, district);
 
             propertyRepository.add(property);
 
