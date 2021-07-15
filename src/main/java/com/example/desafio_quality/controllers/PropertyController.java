@@ -22,7 +22,17 @@ public class PropertyController {
     }
 
     @GetMapping("/{id}/totalValue")
-    public ResponseEntity<?> createProperty(@PathVariable Long id){
+    public ResponseEntity<?> getTotalValue(@PathVariable Long id){
         return ResponseEntity.ok(propertyService.getTotalValue(id));
+    }
+
+    @GetMapping("/{id}/totalMeters")
+    public ResponseEntity<?> getTotalMeters(@PathVariable Long id){
+        return ResponseEntity.ok(propertyService.getTotalMeters(id));
+    }
+
+    @GetMapping("/{id}/bigRoom")
+    public ResponseEntity<?> getBigRoom(@PathVariable Long id){
+        return ResponseEntity.ok(propertyService.getBigRoom(id));
     }
 }
