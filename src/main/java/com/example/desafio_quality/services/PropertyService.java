@@ -21,6 +21,7 @@ public class PropertyService {
 
     public PropertyDTO addProperty(PropertyForm propertyForm) {
         if (!districtRepository.exists(propertyForm.getDistrict().getProp_district(), propertyForm.getDistrict().getValue_district_m2())) {
+            System.out.println(propertyForm.getRooms());
             Property property = PropertyMapper.formToEntity(propertyForm);
 
             propertyRepository.add(property);

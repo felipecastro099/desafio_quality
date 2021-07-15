@@ -8,12 +8,12 @@ import java.util.List;
 public class PropertyDTO {
     private String name;
     private District district;
-    private List<Room> room;
+    private List<Room> rooms;
 
-    public PropertyDTO(String name, District district, List<Room> room) {
+    public PropertyDTO(String name, District district, List<Room> rooms) {
         this.name = name;
         this.district = district;
-        this.room = room;
+        this.rooms = rooms;
     }
 
     public String getName() {
@@ -24,7 +24,7 @@ public class PropertyDTO {
         return district;
     }
 
-    public List<Room> getRoom() {
-        return room;
+    public List<Room> getRooms() {
+        return rooms;
     }
 }

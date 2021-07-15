@@ -1,5 +1,6 @@
 package com.example.desafio_quality.forms;
 
+import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,7 +12,7 @@ public class DistrictForm {
     @Size(max = 45, message = "can't be more than 45 characters")
     private String prop_district;
     @NotNull(message = "can not be null")
-    @Size(max = 13, message = "can't be more than 13 digits")
+    @DecimalMax(value = "9999999999.999", message = "can't be more than 13 digits")
     private BigDecimal value_district_m2;
 
     public DistrictForm(String prop_district, BigDecimal value_district_m2) {

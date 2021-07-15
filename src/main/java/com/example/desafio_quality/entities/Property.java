@@ -15,12 +15,6 @@ public class Property {
         this.rooms = rooms;
     }
 
-    public Property(Long id, String name, District district) {
-        this.id = id;
-        this.name = name;
-        this.district = district;
-    }
-
     public Long getId() {
         return id;
     }
