@@ -3,7 +3,6 @@ package com.example.desafio_quality.implementacions;
 import com.example.desafio_quality.entities.District;
 import com.example.desafio_quality.entities.Property;
 import com.example.desafio_quality.entities.Room;
-import com.example.desafio_quality.utils.property.GetBigRoomProperty;
 import com.example.desafio_quality.utils.property.TotalPriceProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
