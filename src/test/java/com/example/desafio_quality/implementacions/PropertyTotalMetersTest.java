@@ -3,14 +3,10 @@ package com.example.desafio_quality.implementacions;
 import com.example.desafio_quality.entities.District;
 import com.example.desafio_quality.entities.Property;
 import com.example.desafio_quality.entities.Room;
-import com.example.desafio_quality.repositories.DistrictRepository;
-import com.example.desafio_quality.repositories.PropertyRepository;
 import com.example.desafio_quality.utils.property.GetTotalMeters;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
@@ -19,12 +15,6 @@ import java.util.ArrayList;
 @SpringBootTest
 public class PropertyTotalMetersTest {
 
-    @Autowired
-    private DistrictRepository districtRepository;
-
-    @Autowired
-    private PropertyRepository propertyRepository;
-
     private District district;
     private Property property;
 
@@ -32,15 +22,6 @@ public class PropertyTotalMetersTest {
     public void init() {
         this.district = new District(1L, "District Teste", BigDecimal.valueOf(10.0));
         this.property= new Property(1L, "Property Teste", this.district, new ArrayList<>());
-
-        districtRepository.add(this.district);
-        propertyRepository.add(this.property);
-    }
-
-    @AfterEach
-    public void finish() {
-        districtRepository.removeAll();
-        propertyRepository.removeAll();
     }
 
     @Test
