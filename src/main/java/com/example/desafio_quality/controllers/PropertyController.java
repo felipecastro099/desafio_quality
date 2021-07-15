@@ -35,4 +35,9 @@ public class PropertyController {
     public ResponseEntity<?> getBigRoom(@PathVariable Long id){
         return ResponseEntity.ok(propertyService.getBigRoom(id));
     }
+
+    @GetMapping("/{id}/rooms")
+    public ResponseEntity<?> getRooms(@PathVariable Long id){
+        return ResponseEntity.ok(propertyService.getTotalMetersFromRoom(id));
+    }
 }

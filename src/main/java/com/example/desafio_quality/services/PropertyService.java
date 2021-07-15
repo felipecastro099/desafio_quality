@@ -1,5 +1,6 @@
 package com.example.desafio_quality.services;
 
+import com.example.desafio_quality.dtos.room.RoomMetersDTO;
 import com.example.desafio_quality.dtos.property.PropertyBigRoomDTO;
 import com.example.desafio_quality.dtos.property.PropertyDTO;
 import com.example.desafio_quality.dtos.property.PropertyTotalMetersDTO;
@@ -14,8 +15,12 @@ import com.example.desafio_quality.utils.mappers.PropertyMapper;
 import com.example.desafio_quality.utils.property.GetBigRoomProperty;
 import com.example.desafio_quality.utils.property.GetTotalMeters;
 import com.example.desafio_quality.utils.property.TotalPriceProperty;
+import com.example.desafio_quality.utils.room.GetMeters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PropertyService {
@@ -67,5 +72,21 @@ public class PropertyService {
         }
 
         throw new NotFoundException("Property not found");
+    }
+
+    public List<RoomMetersDTO> getTotalMetersFromRoom(Long id) {
+        Property property = propertyRepository.findByIdOrNull(id);
+
+        if (property == null) {
+            throw new NotFoundException("Property not found!");
+        }
+
+        List<RoomMetersDTO> metersDTOS = new ArrayList<>();
+
+        property.getRooms().forEach(room -> {
+            metersDTOS.add(new RoomMetersDTO(room.getId(), room.getName(), room.getWidth(), room.getLength(), GetMeters.getMeters(room)));
+        });
+
+        return metersDTOS;
     }
 }
