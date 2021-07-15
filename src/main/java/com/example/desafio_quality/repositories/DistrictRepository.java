@@ -12,6 +12,10 @@ import java.util.Optional;
 public class DistrictRepository {
     List<District> db = new ArrayList<>();
 
+    public List<District> all() {
+        return db;
+    }
+
     public District findByIdOrNull(Long id) {
         Optional<District> result =  db.stream().filter(district -> district.getId() == id).findFirst();
 
@@ -31,4 +35,6 @@ public class DistrictRepository {
     public void add(District district) {
         db.add(district);
     }
+
+    public void removeAll() { db.removeAll(all()); }
 }

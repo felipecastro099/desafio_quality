@@ -29,4 +29,6 @@ public class PropertyRepository {
     public void addRoomInProperty(Property property, Room room) {
         property.getRooms().add(room);
     }
+
+    public void removeAll() { db.removeAll(all()); }
 }
