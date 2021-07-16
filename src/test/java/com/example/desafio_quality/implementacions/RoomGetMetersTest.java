@@ -1,14 +1,13 @@
 package com.example.desafio_quality.implementacions;
 
 import com.example.desafio_quality.entities.Room;
-import com.example.desafio_quality.utils.property.TotalPriceProperty;
 import com.example.desafio_quality.utils.room.GetMeters;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigDecimal;
-
+@SpringBootTest
 public class RoomGetMetersTest {
     private Room room;
 

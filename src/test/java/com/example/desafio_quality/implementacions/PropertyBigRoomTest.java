@@ -7,10 +7,12 @@ import com.example.desafio_quality.utils.property.GetBigRoomProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
+@SpringBootTest
 public class PropertyBigRoomTest {
 
     private District district;
