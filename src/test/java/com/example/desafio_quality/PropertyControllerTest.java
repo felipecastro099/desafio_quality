@@ -1,11 +1,13 @@
 package com.example.desafio_quality;
 
 import com.example.desafio_quality.entities.District;
+import com.example.desafio_quality.entities.Property;
 import com.example.desafio_quality.exceptions.NotFoundException;
 import com.example.desafio_quality.forms.PropertyForm;
 import com.example.desafio_quality.forms.RoomForm;
 import com.example.desafio_quality.repositories.DistrictRepository;
 import com.example.desafio_quality.repositories.PropertyRepository;
+import com.example.desafio_quality.utils.mappers.PropertyMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,8 +46,8 @@ public class PropertyControllerTest {
 
     @BeforeEach
     public void init() {
-        districtRepository.removeAll();
         propertyRepository.removeAll();
+        districtRepository.removeAll();
     }
 
     @Test
@@ -74,13 +76,37 @@ public class PropertyControllerTest {
 
     @Test
     public void shouldReturnGetTotalPriceProperty() throws Exception {
-        shouldSaveProperty();
+        Property property = createProperty();
 
-        mockMvc.perform(get("/properties/1/totalValue"))
+        mockMvc.perform(get("/properties/{id}/totalValue", property.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$").isNotEmpty())
                 .andExpect(jsonPath("$.totalValue").value(new BigDecimal("10000.0")));
+    }
+
+    @Test
+    public void shouldReturnGetTotalMetersProperty() throws Exception {
+        Property property = createProperty();
+
+        mockMvc.perform(get("/properties/{id}/totalMeters", property.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isNotEmpty())
+                .andExpect(jsonPath("$.totalMeters").value(100.0));
+    }
+
+    @Test
+    public void shouldReturnBigRoomProperty() throws Exception {
+        Property property = createProperty();
+
+        mockMvc.perform(get("/properties/{id}/bigRoom", property.getId()))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isNotEmpty())
+                .andExpect(jsonPath("$.bigRoom.name").value("Room"))
+                .andExpect(jsonPath("$.bigRoom.width").value(10.0))
+                .andExpect(jsonPath("$.bigRoom.length").value(10.0));
     }
 
     public RoomForm returnRoomForm() {
@@ -97,5 +123,14 @@ public class PropertyControllerTest {
 
     public PropertyForm returnNotValidPropertyForm() {
         return new PropertyForm("Property", 2L, returnRoomAsList());
+    }
+
+    public Property createProperty() {
+        District district = new District(1L, "District Test", new BigDecimal("100"));
+        Property property = PropertyMapper.formToEntity(returnValidPropertyForm(), district);
+
+        propertyRepository.add(property);
+
+        return property;
     }
 }
